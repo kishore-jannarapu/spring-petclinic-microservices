@@ -16,6 +16,8 @@
 package org.springframework.samples.petclinic.customers.web;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
@@ -26,7 +28,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 /**
  * @author mszarlinski@bravurasolutions.com on 2016-12-05.
  */
-@Data
+@Getter
+@Setter
 class PetRequest {
     private int id;
 

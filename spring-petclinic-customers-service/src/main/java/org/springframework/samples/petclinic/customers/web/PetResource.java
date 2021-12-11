@@ -18,6 +18,8 @@ package org.springframework.samples.petclinic.customers.web;
 import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.samples.petclinic.customers.model.*;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +42,10 @@ class PetResource {
     private final PetRepository petRepository;
     private final OwnerRepository ownerRepository;
 
+    PetResource(PetRepository petRepository, OwnerRepository ownerRepository){
+        this.petRepository = petRepository;
+        this.ownerRepository = ownerRepository;
+    }
 
     @GetMapping("/petTypes")
     public List<PetType> getPetTypes() {
@@ -76,7 +82,7 @@ class PetResource {
         petRepository.findPetTypeById(petRequest.getTypeId())
             .ifPresent(pet::setType);
 
-        log.info("Saving pet {}", pet);
+        //log.info("Saving pet {}", pet);
         return petRepository.save(pet);
     }
 

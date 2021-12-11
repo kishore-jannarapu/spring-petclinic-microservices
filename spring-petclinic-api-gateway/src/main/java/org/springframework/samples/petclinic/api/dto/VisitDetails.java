@@ -15,13 +15,15 @@
  */
 package org.springframework.samples.petclinic.api.dto;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * @author Maciej Szarlinski
  */
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 public class VisitDetails {
 

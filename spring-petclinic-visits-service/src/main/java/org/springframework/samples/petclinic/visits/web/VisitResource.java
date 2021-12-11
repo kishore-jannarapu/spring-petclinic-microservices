@@ -22,6 +22,8 @@ import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.samples.petclinic.visits.model.Visit;
 import org.springframework.samples.petclinic.visits.model.VisitRepository;
@@ -46,6 +48,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Timed("petclinic.visit")
 class VisitResource {
 
+    @Autowired
     private final VisitRepository visitRepository;
 
     @PostMapping("owners/*/pets/{petId}/visits")

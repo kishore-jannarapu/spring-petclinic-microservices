@@ -16,6 +16,8 @@
 package org.springframework.samples.petclinic.api.boundary.web;
 
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.circuitbreaker.ReactiveCircuitBreaker;
 import org.springframework.cloud.client.circuitbreaker.ReactiveCircuitBreakerFactory;
 import org.springframework.samples.petclinic.api.application.CustomersServiceClient;
@@ -35,7 +37,6 @@ import java.util.stream.Collectors;
  * @author Maciej Szarlinski
  */
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/gateway")
 public class ApiGatewayController {
 
@@ -44,6 +45,12 @@ public class ApiGatewayController {
     private final VisitsServiceClient visitsServiceClient;
 
     private final ReactiveCircuitBreakerFactory cbFactory;
+
+    ApiGatewayController(CustomersServiceClient customersServiceClient,VisitsServiceClient visitsServiceClient,ReactiveCircuitBreakerFactory cbFactory){
+        this.customersServiceClient = customersServiceClient;
+        this.visitsServiceClient = visitsServiceClient;
+        this.cbFactory = cbFactory;
+    }
 
     @GetMapping(value = "owners/{ownerId}")
     public Mono<OwnerDetails> getOwnerDetails(final @PathVariable int ownerId) {

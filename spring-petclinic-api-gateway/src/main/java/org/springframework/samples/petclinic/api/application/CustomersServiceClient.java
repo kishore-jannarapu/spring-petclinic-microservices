@@ -26,10 +26,13 @@ import reactor.core.publisher.Mono;
  * @author Maciej Szarlinski
  */
 @Component
-@RequiredArgsConstructor
 public class CustomersServiceClient {
 
     private final WebClient.Builder webClientBuilder;
+
+    CustomersServiceClient(WebClient.Builder webClientBuilder) {
+        this.webClientBuilder = webClientBuilder;
+    }
 
     public Mono<OwnerDetails> getOwner(final int ownerId) {
         return webClientBuilder.build().get()

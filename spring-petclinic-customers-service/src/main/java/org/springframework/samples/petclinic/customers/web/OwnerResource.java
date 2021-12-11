@@ -18,6 +18,8 @@ package org.springframework.samples.petclinic.customers.web;
 import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.samples.petclinic.customers.model.Owner;
 import org.springframework.samples.petclinic.customers.model.OwnerRepository;
@@ -37,11 +39,16 @@ import java.util.Optional;
 @RequestMapping("/owners")
 @RestController
 @Timed("petclinic.owner")
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Slf4j
 class OwnerResource {
 
     private final OwnerRepository ownerRepository;
+
+    public OwnerResource(OwnerRepository ownerRepository){
+    
+    this.ownerRepository = ownerRepository;
+    }
 
     /**
      * Create Owner
@@ -83,7 +90,7 @@ class OwnerResource {
         ownerModel.setCity(ownerRequest.getCity());
         ownerModel.setAddress(ownerRequest.getAddress());
         ownerModel.setTelephone(ownerRequest.getTelephone());
-        log.info("Saving owner {}", ownerModel);
+        //log.info("Saving owner {}", ownerModel);
         ownerRepository.save(ownerModel);
     }
 }

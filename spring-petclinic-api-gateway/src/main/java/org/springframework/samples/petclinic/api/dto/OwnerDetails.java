@@ -16,18 +16,26 @@
 package org.springframework.samples.petclinic.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.jsonschema.JsonSerializableSchema;
+
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
+import java.io.Serializable;
+
 /**
  * @author Maciej Szarlinski
  */
-@Data
-public class OwnerDetails {
+@Getter
+@Setter
+public class OwnerDetails implements Serializable {
 
     private int id;
 
@@ -40,13 +48,18 @@ public class OwnerDetails {
     private String city;
 
     private String telephone;
-
+    
+    @JsonIgnore
     private final List<PetDetails> pets = new ArrayList<>();
 
     @JsonIgnore
     public List<Integer> getPetIds() {
         return pets.stream()
-            .map(PetDetails::getId)
+            .map( petDetails-> petDetails.getId())
             .collect(toList());
+    }
+
+    public List<PetDetails>  getPets(){
+        return pets;
     }
 }

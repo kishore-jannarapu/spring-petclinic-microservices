@@ -29,13 +29,16 @@ import static java.util.stream.Collectors.joining;
  * @author Maciej Szarlinski
  */
 @Component
-@RequiredArgsConstructor
 public class VisitsServiceClient {
 
     // Could be changed for testing purpose
     private String hostname = "http://visits-service/";
 
     private final WebClient.Builder webClientBuilder;
+
+    VisitsServiceClient(WebClient.Builder webClientBuilder) {
+        this.webClientBuilder = webClientBuilder;
+    }
 
     public Mono<Visits> getVisitsForPets(final List<Integer> petIds) {
         return webClientBuilder.build()

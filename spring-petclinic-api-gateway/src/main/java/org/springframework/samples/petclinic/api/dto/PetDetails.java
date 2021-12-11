@@ -16,6 +16,8 @@
 package org.springframework.samples.petclinic.api.dto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,8 @@ import java.util.List;
 /**
  * @author Maciej Szarlinski
  */
-@Data
+@Setter
+@Getter
 public class PetDetails {
 
     private int id;
@@ -35,5 +38,5 @@ public class PetDetails {
     private PetType type;
 
     private final List<VisitDetails> visits = new ArrayList<>();
-
+ 
 }
